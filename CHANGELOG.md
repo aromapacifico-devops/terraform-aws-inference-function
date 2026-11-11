@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.0.0]
+
 ### Added
 
 - Focus confirmation pattern. A platform event bus, a rule that sends each published flight record of one mission type to a work queue through a delivery role, a dead letter queue with redrive from the work queue only, a function with its log group and an event source mapping that reports failures per message.
