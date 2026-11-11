@@ -73,6 +73,9 @@ resource "aws_sqs_queue_redrive_allow_policy" "dead_letter" {
 
 # Flight objects. Versioning keeps every object version the flight record names.
 resource "aws_s3_bucket" "objects" {
+  #checkov:skip=CKV2_AWS_62:The function starts from the published flight record, see docs/iac-exceptions.md
+  #checkov:skip=CKV_AWS_18:Object deliveries are recorded as S3 data events in the audit trail, see docs/iac-exceptions.md
+  #checkov:skip=CKV_AWS_144:The pilot runs in one Region, see docs/iac-exceptions.md
   provider = aws.project
 
   bucket        = var.names.objects_bucket
@@ -198,6 +201,7 @@ resource "aws_dynamodb_table" "cases" {
 }
 
 resource "aws_cloudwatch_log_group" "function" {
+  #checkov:skip=CKV_AWS_338:Operational logs keep 30 days, see docs/iac-exceptions.md
   provider = aws.project
 
   name              = local.log_group
@@ -208,6 +212,12 @@ resource "aws_cloudwatch_log_group" "function" {
 }
 
 resource "aws_lambda_function" "this" {
+  #checkov:skip=CKV_AWS_115:The account allows 10 concurrent executions and the mapping caps pollers, see docs/iac-exceptions.md
+  #checkov:skip=CKV_AWS_116:Failed records reach the dead letter queue of the work queue, see docs/iac-exceptions.md
+  #checkov:skip=CKV_AWS_117:The function calls regional AWS APIs only, see docs/iac-exceptions.md
+  #checkov:skip=CKV_AWS_173:Environment variables hold names only, see docs/iac-exceptions.md
+  #checkov:skip=CKV_AWS_272:No signing profile exists yet, see docs/iac-exceptions.md
+  #checkov:skip=CKV_AWS_50:Traces are outside the current observability design, see docs/iac-exceptions.md
   provider = aws.project
 
   function_name    = var.names.function

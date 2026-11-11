@@ -1,0 +1,16 @@
+# Shared checks of the organization on each pull request and on main.
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  checks:
+    uses: aromapacifico-devops/.github/.github/workflows/terraform-module.yml@main
+    permissions:
+      contents: read
