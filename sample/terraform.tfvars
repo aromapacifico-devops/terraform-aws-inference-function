@@ -12,3 +12,9 @@ common_tags = {
   CostCenter  = "pruebas"
   ManagedBy   = "Terraform"
 }
+
+# Nova 2 Lite through the US cross-Region inference profile.
+bedrock_model_id = "us.amazon.nova-2-lite-v1:0"
+
+# Placeholder package that only answers with no failures.
+function_package_path = "../tests/fixtures/function.zip"
