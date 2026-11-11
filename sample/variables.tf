@@ -29,3 +29,13 @@ variable "common_tags" {
   description = "Tags applied to every resource through the provider."
   type        = map(string)
 }
+
+variable "bedrock_model_id" {
+  description = "Model or inference profile the function invokes."
+  type        = string
+}
+
+variable "function_package_path" {
+  description = "Package deployed to the function of the sample."
+  type        = string
+}
